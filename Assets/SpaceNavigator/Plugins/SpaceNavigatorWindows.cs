@@ -30,7 +30,6 @@ class SpaceNavigatorWindows : SpaceNavigator {
 	// Device variables
 	private readonly Sensor _sensor;
 	private readonly Device _device;
-	//private readonly Keyboard _keyboard;
 
 	#region - Singleton -
 	/// <summary>
@@ -41,7 +40,7 @@ class SpaceNavigatorWindows : SpaceNavigator {
 			if (_device == null) {
 				_device = new DeviceClass();
 				_sensor = _device.Sensor;
-				//_keyboard = _device.Keyboard;
+				Keyboard = _device.Keyboard;
 			}
 			if (!_device.IsConnected)
 				_device.Connect();

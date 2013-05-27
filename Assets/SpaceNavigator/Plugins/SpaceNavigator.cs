@@ -1,10 +1,13 @@
 ﻿using System;
+using TDx.TDxInput;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 public abstract class SpaceNavigator : IDisposable {
+	public static Keyboard Keyboard;
+
 	// Public runtime API
 	public static Vector3 Translation {
 		get { return Instance.GetTranslation(); }

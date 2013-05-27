@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
+using TDx.TDxInput;
 using UnityEngine;
 using UnityEditor;
 
@@ -9,6 +10,7 @@ public class SpaceNavigatorWindow : EditorWindow {
 	public enum OperationMode { Fly, Telekinesis, GrabMove }
 	private OperationMode _operationMode;
     private bool _orbitMode;
+	private bool _rmbDown;
 	public enum CoordinateSystem { Camera, World, Parent, Local }
 	private static CoordinateSystem _coordSys;
 
@@ -109,6 +111,8 @@ public class SpaceNavigatorWindow : EditorWindow {
 	/// This is called 100x per second (if the window content is visible).
 	/// </summary>
 	public void Update() {
+		_rmbDown = SpaceNavigator.Keyboard.IsKeyDown(1);
+
 		// Fly mode should not be impaired by locked axes.
 		SpaceNavigator.IsLockingAllowed = _operationMode != OperationMode.Fly;
 
@@ -141,11 +145,11 @@ public class SpaceNavigatorWindow : EditorWindow {
 				throw new ArgumentOutOfRangeException();
 		}
 
-		//// Detect keyboard clicks (not working).
-		//if (Keyboard.IsKeyDown(1))
-		//	D.log("Button 0 pressed");
-		//if (Keyboard.IsKeyDown(2))
-		//	D.log("Button 1 pressed");
+		// Detect keyboard clicks (not working).
+		if (SpaceNavigator.Keyboard.IsKeyDown(1))
+			Debug.Log("Button 0 pressed");
+		if (SpaceNavigator.Keyboard.IsKeyDown(2))
+			Debug.Log("Button 1 pressed");
 
 		_wasIdle = false;
 	}
@@ -153,7 +157,7 @@ public class SpaceNavigatorWindow : EditorWindow {
 	private void Fly(SceneView sceneView) {
 		SyncRigWithScene();
 
-	    if (_orbitMode)
+	    if (_orbitMode || _rmbDown)
             Orbit();
 	    else {
     	    _camera.Translate(SpaceNavigator.Translation, Space.Self);
