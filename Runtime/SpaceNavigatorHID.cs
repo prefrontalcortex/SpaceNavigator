@@ -109,6 +109,11 @@ namespace SpaceNavigatorDriver
             DebugLog("SpaceNavigatorHID : FinishSetup");
         }
 
+        public override unsafe float EvaluateMagnitude(void* statePtr)
+        {
+            return Rotation.ReadValue().magnitude + Translation.ReadValue().magnitude;
+        }
+
         // We can also expose a '.current' getter equivalent to 'Gamepad.current'.
         // Whenever our device receives input, MakeCurrent() is called. So we can
         // simply update a '.current' getter based on that.

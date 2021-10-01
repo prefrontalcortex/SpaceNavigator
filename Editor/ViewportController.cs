@@ -87,8 +87,7 @@ namespace SpaceNavigatorDriver
             _wasHorizonLocked = Settings.LockHorizon;
 
             // Return if device is idle.
-            if (SpaceNavigatorHID.current.Translation.ReadValue() == Vector3.zero &&
-                SpaceNavigatorHID.current.Rotation.ReadValue() == Vector3.zero)
+            if (SpaceNavigatorHID.current.EvaluateMagnitude() < 0.005f)
             {
                 _wasIdle = true;
                 return;
