@@ -1,4 +1,3 @@
-using System;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -91,22 +90,6 @@ namespace SpaceNavigatorDriver
             var reportPtr = (byte*) stateEventPtr->state;
             var reportId = *reportPtr;
             var reportStatePtr = (reportPtr + 1); // or wherever the actual report starts.
-
-            // Debug: Logge die Rohdaten für Rotation (Report 2)
-            if (reportId == 2)
-            {
-                // 6 Bytes für 3x short (x, y, z)
-                byte[] raw = new byte[6];
-                for (int i = 0; i < 6; i++)
-                    raw[i] = reportStatePtr[i];
-                Debug.Log($"[SpaceNavigatorEnterpriseHID] Raw rotation bytes: {BitConverter.ToString(raw)}");
-
-                // Optional: Werte als short ausgeben
-                short x = BitConverter.ToInt16(raw, 0);
-                short z = BitConverter.ToInt16(raw, 2);
-                short y = BitConverter.ToInt16(raw, 4);
-                Debug.Log($"[SpaceNavigatorEnterpriseHID] Rotation shorts: x={x}, y={y}, z={z}");
-            }
 
             // We have two options here. We can either use InputState.Change with a DeltaStateEvent that we set up
             // from the event we have received (and simply update either report1 or report2 only) or we can merge
