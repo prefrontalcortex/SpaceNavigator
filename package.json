@@ -9,7 +9,7 @@
   },
  "repository": {
     "type": "git",
-    "url": "https://github.com/PatHightree/SpaceNavigator.git",
+    "url": "https://github.com/prefrontalcortex/SpaceNavigator.git",
     "revision": "220141cef5bc34da382552a32447b53ecda0ed6a"
   },
   "keywords": [
@@ -21,7 +21,7 @@
   "author": {
     "name": "Patrick Hogenboom",
     "email": "spacenavigator.driver@pm.me",
-    "url": "https://github.com/PatHightree/SpaceNavigator"
+    "url": "https://github.com/prefrontalcortex/SpaceNavigator"
   },
   "samples":[
   {
